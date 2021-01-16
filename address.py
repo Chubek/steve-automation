@@ -12,7 +12,7 @@ class Address:
 
 
     def __get_geocode(self):
-        KEY = 'AIzaSyABRC1BA_smOa1N8pBjP-Pvco4BNqb2l_s'
+        KEY = ''
 
         gmaps = googlemaps.Client(key=KEY)
         
