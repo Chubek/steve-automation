@@ -1,7 +1,7 @@
 from sklearn.cluster import KMeans
 
 
-def cluster(X, X_prime=[]):
+def cluster(X, X_prime=()):
     km = KMeans(
         n_clusters=3, init='random',
         n_init=10, max_iter=300, 

@@ -1,4 +1,8 @@
 import googlemaps
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 class Address:
 
@@ -12,7 +16,7 @@ class Address:
 
 
     def __get_geocode(self):
-        KEY = ''
+        KEY = os.environ.get("KEY")
 
         gmaps = googlemaps.Client(key=KEY)
         
