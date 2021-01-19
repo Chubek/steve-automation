@@ -25,12 +25,12 @@ class Address:
 
         return lat_long["lat"], lat_long["lng"]
 
-    def __hash_zip_soc(self):
-        return hash(self.zip), hash(self.soc)
+    def __hash_zip(self):
+        return hash(self.zip)
 
 
     def return_val(self):
         lat, lng = self.__get_geocode()
-        zip_hash, soc_hash = self.__hash_zip_soc()
+        zip_hash, soc_hash = self.__hash_zip()
 
-        return (lat, lng, zip_hash, soc_hash)
+        return (lat, lng, zip_hash)
