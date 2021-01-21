@@ -2,13 +2,12 @@ import googlemaps
 from dotenv import load_dotenv
 import os
 
+
 load_dotenv()
 
 class Address:
 
-    def __init__(self, name, soc, address, city, province, zip):
-        self.name = name
-        self.soc = soc
+    def __init__(self, address, city, province, zip):
         self.address = address
         self.city = city
         self.province = province
@@ -31,6 +30,6 @@ class Address:
 
     def return_val(self):
         lat, lng = self.__get_geocode()
-        zip_hash, soc_hash = self.__hash_zip()
+        zip_hash = self.__hash_zip()
 
         return (lat, lng, zip_hash)
