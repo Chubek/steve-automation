@@ -34,21 +34,23 @@ class Parser:
         err = 0
        
         for i, route in enumerate(routes):
-            try:
-                columns = self.__read_columns(route, [address_field, city_field, province_field, zip_field], start, end)
-                
-                addresses = [Address(columns.iloc[i, 0], columns.iloc[i, 1], columns.iloc[i, 2], columns.iloc[i, 3]).return_val() for i in range(columns.shape[0])]
-
-                labels, self.km[route] = cluster(addresses)
-
-                columns["Label"] = [f"L{label}" for label in labels]
-
-                self.__write_df(columns, f"{route}_sheet", close=i + 1 == len(routes))
-
-                done += 1
-            except:
+            
+            columns = self.__read_columns(route, [address_field, city_field, province_field, zip_field], start, end)
+            
+            if columns.shape[0] < 1:
                 err += 1
                 continue
+
+            addresses = [Address(columns.iloc[i, 0], columns.iloc[i, 1], columns.iloc[i, 2], columns.iloc[i, 3]).return_val() for i in range(columns.shape[0])]
+
+            labels, self.km[route] = cluster(addresses)
+
+            columns["Label"] = [f"L{label}" for label in labels]
+
+            self.__write_df(columns, f"{route}_sheet", close=i + 1 == len(routes))
+
+            done += 1
+                
 
         return done, err
 
